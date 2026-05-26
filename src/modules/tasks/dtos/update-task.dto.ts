@@ -1,5 +1,6 @@
+import { ApiPropertyOptional } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsDate, IsEnum, IsNotEmpty, IsString, isString } from "class-validator";
+import { IsDate, IsEnum, IsNotEmpty, IsOptional, IsString, isString } from "class-validator";
 
 enum StatusEnum {
     PENDING = 'pending',
@@ -15,26 +16,31 @@ enum PriorityEnum {
 
 export class UpdateTaskDto{
 
+    @ApiPropertyOptional()
     @IsString( {message: 'El title es un texto'})
-    @IsNotEmpty( {message: 'El title es obligatorio'})
+    @IsOptional()
     title?:string;
 
+    @ApiPropertyOptional()
     @IsString( {message: 'El description es un texto'})
-    @IsNotEmpty( {message: 'El description es obligatorio'})
+    @IsOptional()
     description?: string;
 
+    @ApiPropertyOptional()
     @IsString( {message: 'El status es un texto'})
-    @IsNotEmpty( {message: 'El status es obligatorio'})
+    @IsOptional()
     @IsEnum(StatusEnum, {message: 'El status solo puede ser: pending | in_progress | done'})
     status?: string; // todo enum enum: pending | in_progress | done
 
+    @ApiPropertyOptional()
     @IsString( {message: 'El priority es un texto'})
-    @IsNotEmpty( {message: 'El priority es obligatorio'})
+    @IsOptional()
     @IsEnum(PriorityEnum, {message: 'El status solo puede ser: low | medium | high'})
     priority?: string // todo enum enum: low | medium | high
 
+    @ApiPropertyOptional()
     @IsString( {message: 'El assignedTo es un texto'})
-    @IsNotEmpty( {message: 'El assignedTo es obligatorio'})
+    @IsOptional()
     assignedTo?: string;
 
 }
